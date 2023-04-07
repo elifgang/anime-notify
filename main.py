@@ -118,31 +118,33 @@ def search_Anime(name,list_animes): # Cambiar estructura
     else:
         return None
 
+# enviar notificacion
 def send_notification(title, message):
-    icon_file = r"imagen.jpeg"
+    # icon_file = r"imagen.jpeg"
     notification = Notify()
     notification.title = title
     notification.message = message
-    notification.icon = icon_file
+    # notification.icon = icon_file
     notification.send()
+
+
+def main():
+    try:
+        inputAnime = input("What anime is going to be notifiyed? \n") # Anime to search
+        url_base = "https://notify.moe/explore" # web page
+        Listname = get_ListName(url_base) # Obtain the naime list
+        position = get_Posicion(Listname,inputAnime) # We shearch for the position of the anime
+        links = get_AnimeLink(url_base,position) # We obtain the anime link (/anime/id)
+        anime_name = get_Name(links) # We obtain the name
+        episode_number = get_Episode(links) # Episode to air / Last espisode
+        state = get_state_episode(links) # Espisode state
+        time = get_restTime(links, episode_number) # Obtain the rest time 
     
-# def main():
-#     try:
-#         inputAnime = input("What anime is going to be notifiyed? \n") # Anime to search
-#         url_base = "https://notify.moe/explore" # web page
-#         Listname = get_ListName(url_base) # Obtain the naime list
-#         position = get_Posicion(Listname,inputAnime) # We shearch for the position of the anime
-#         links = get_AnimeLink(url_base,position) # We obtain the anime link (/anime/id)
-#         anime_name = get_Name(links) # We obtain the name
-#         episode_number = get_Episode(links) # Episode to air / Last espisode
-#         state = get_state_episode(links) # Espisode state
-#         time = get_restTime(links, episode_number) # Obtain the rest time 
-    
-#         if state == "false":
-#             send_notification("Anime Notification", f"Episode {episode_number+1} of {anime_name} is avaiable.{time}")
-#         else:
-#             send_notification("Anime Notification", f"Episode {episode_number+1} of {anime_name} it`s not avaiable, it`s going to air in {time} days.")
-#     except requests.exceptions.RequestException as exceptMessage:
-#         raise("[378 Error]:", exceptMessage)
+        if state == "false":
+            send_notification("Anime Notification", f"Episode {episode_number+1} of {anime_name} is avaiable.{time}")
+        else:
+            send_notification("Anime Notification", f"Episode {episode_number+1} of {anime_name} it`s not avaiable, it`s going to air in {time} days.")
+    except requests.exceptions.RequestException as exceptMessage:
+        raise("[378 Error]:", exceptMessage)
         
-# main()
+main()

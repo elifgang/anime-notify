@@ -1,4 +1,4 @@
-[![v1.1.2b](https://img.shields.io/badge/release-v1.2-green)](https://github.com/azuzu0/proyeto_k/blob/main/log/v1.1.2b/README.md) [![v1.1.2b](https://img.shields.io/badge/release-v1.2-green)](python)
+[![v1.1.2b](https://img.shields.io/badge/release-v1.2-green)](python)
 
 ### Descripción general
 
